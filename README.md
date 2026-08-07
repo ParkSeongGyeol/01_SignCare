@@ -88,11 +88,21 @@ vercel
 ### **2️⃣ 백엔드 배포 (Railway)**
 
 - Railway에서 GitHub 연결 후 **배포 진행**
-- CORS 설정 필요 (`server.js` 수정)
+- Railway 프로젝트의 **Root Directory 를 `backend` 로** 지정하세요.
+- 환경변수는 Railway 대시보드에 등록합니다 (`.env` 파일은 커밋되지 않습니다).
+- 새 프론트엔드 도메인이 생기면 `server.js` 의 `allowedOrigins` 에 추가하세요.
 
 ```javascript
-app.use(cors({ origin: "*" }));
+// backend/server.js
+const allowedOrigins = [
+  "https://signcare-vue.vercel.app",
+  "http://localhost:5173",
+  // 새 배포 도메인을 여기에 추가
+];
 ```
+
+> ⚠️ `app.use(cors({ origin: "*" }))` 로 열지 마세요. 아무 사이트나 이 API를
+> 대신 호출할 수 있게 되어, 업로드 API가 외부에서 남용될 수 있습니다.
 
 ---
 
@@ -129,6 +139,26 @@ POST /api/upload
   "message": "파일 업로드 성공!",
   "filename": "1700000000-image.jpg"
 }
+```
+
+---
+
+## 🔐 보안 규칙
+
+이 프로젝트에서 반드시 지켜야 할 것들입니다.
+
+| 규칙                        | 이유                                                                        |
+| --------------------------- | --------------------------------------------------------------------------- |
+| **API 키는 `backend/.env`** | 프론트엔드 환경변수(`VITE_*`)는 빌드 결과물에 평문으로 들어가 누구나 볼 수 있습니다 |
+| **`.env` 커밋 금지**        | 루트 `.gitignore` 에 등록되어 있습니다. 새 키를 넣을 땐 `.env.example` 만 갱신하세요 |
+| **CORS 화이트리스트 유지**  | `origin: "*"` 는 업로드 API 남용으로 이어집니다                              |
+| **업로드는 이미지만**       | `server.js` 의 `fileFilter`·`limits` (5MB, JPEG/PNG/WebP) 를 풀지 마세요      |
+| **파일명은 서버가 생성**    | 사용자가 보낸 `originalname` 을 그대로 쓰면 경로 탈출이 가능합니다            |
+
+배포 전 취약점 점검:
+
+```sh
+npm run audit:all   # backend + frontend 한 번에
 ```
 
 ---

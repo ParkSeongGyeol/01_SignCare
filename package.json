@@ -2,20 +2,14 @@
   "name": "healthcare-chatbot",
   "version": "1.0.0",
   "private": true,
-  "main": "index.js",
+  "main": "backend/server.js",
   "scripts": {
-    "start": "node backend/server.js"
-  },
-  "dependencies": {
-    "axios": "^1.7.7",
-    "express": "^4.18.2",
-    "cors": "^2.8.5",
-    "body-parser": "^1.20.2",
-    "multer": "^1.4.5-lts.1",
-    "dotenv": "^16.0.3"
+    "start": "node backend/server.js",
+    "install:all": "npm --prefix backend install && npm --prefix frontend install",
+    "audit:all": "npm --prefix backend audit && npm --prefix frontend audit"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "SignCare - 당뇨 환자를 위한 헬스케어 챗봇 (루트 워크스페이스 스크립트만 관리합니다. 실제 의존성은 backend/, frontend/ 각각의 package.json을 사용하세요.)"
 }
