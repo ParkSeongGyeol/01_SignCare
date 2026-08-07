@@ -1,53 +1,33 @@
 // src/services/huggingface.js
-import axios from 'axios';
+//
+// ⚠️ 보안 주의
+// 예전 버전은 이 파일에서 Hugging Face API를 브라우저에서 직접 호출하면서
+// Authorization 헤더에 API 키를 넣었습니다. 프론트엔드 코드는 전부 사용자에게
+// 그대로 전달되므로, 그렇게 하면 빌드 결과물(JS 번들)에서 키를 누구나 꺼낼 수 있습니다.
+//
+// 그래서 지금은 키를 가지고 있는 백엔드(/api/ai/*)를 통해서만 호출합니다.
+// 프론트엔드에는 어떤 형태로도 API 키를 두지 마세요.
 
-// Hugging Face API 클라이언트 생성
-const huggingfaceClient = axios.create({
-  baseURL: 'https://api-inference.huggingface.co/models',
-  headers: {
-    'Content-Type': 'application/json',
-    // 실제 구현에서는 환경 변수에서 API 키를 가져옴
-    'Authorization': 'Bearer ${process.env.VUE_APP_HUGGINGFACE_API_KEY}'
-  }
-});
+import apiClient from './api'
 
-// 텍스트 기반 챗봇 메시지 전송
+// 텍스트 기반 챗봇 메시지 전송 (백엔드가 Hugging Face를 대신 호출)
 export const sendChatbotMessage = async (message) => {
-  try {
-    // Google의 Gemma 3 모델 사용
-    const response = await huggingfaceClient.post('/google/gemma-3-27b-it', {
-      inputs: message,
-      parameters: {
-        max_new_tokens: 250,
-        temperature: 0.7,
-        top_p: 0.9,
-        do_sample: true
-      }
-    });
-    return response.data;
-  } catch (error) {
-    console.error('Hugging Face API 오류:', error);
-    throw error;
-  }
-};
+  const response = await apiClient.post('/api/ai/chat', { message })
+  return response.data
+}
 
-// 이미지 분석 (식단 인식)
-export const analyzeFoodImage = async (imageData) => {
-  try {
-    // YOLOv8 기반 음식 인식 모델 사용
-    const response = await huggingfaceClient.post('/keremberke/yolov8m-food', imageData, {
-      headers: {
-        'Content-Type': 'application/octet-stream'
-      }
-    });
-    return response.data;
-  } catch (error) {
-    console.error('Hugging Face 이미지 분석 API 오류:', error);
-    throw error;
-  }
-};
+// 이미지 분석 (식단 인식) — 백엔드 업로드/분석 엔드포인트 사용
+export const analyzeFoodImage = async (file) => {
+  const formData = new FormData()
+  formData.append('file', file)
+
+  const response = await apiClient.post('/api/upload', formData, {
+    headers: { 'Content-Type': 'multipart/form-data' },
+  })
+  return response.data
+}
 
 export default {
   sendChatbotMessage,
-  analyzeFoodImage
-};
+  analyzeFoodImage,
+}

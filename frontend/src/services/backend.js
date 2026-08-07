@@ -16,10 +16,10 @@ export const sendMessage = async (message) => {
     console.log('백엔드 API 호출 실패, Hugging Face API로 대체:', backendError);
     
     try {
-      // 2. 백엔드 실패 시 Hugging Face API 직접 호출
+      // 2. 재시도 (백엔드가 Hugging Face 호출을 대신 처리)
       const huggingfaceResponse = await huggingfaceService.sendChatbotMessage(message);
       return {
-        message: huggingfaceResponse[0].generated_text,
+        message: huggingfaceResponse.response,
         source: 'huggingface'
       };
     } catch (huggingfaceError) {
@@ -52,14 +52,12 @@ export const uploadAndAnalyzeImage = async (file) => {
     console.log('백엔드 이미지 업로드 실패, Hugging Face API로 대체:', backendError);
     
     try {
-      // 2. 백엔드 실패 시 Hugging Face API 직접 호출
-      // 파일을 ArrayBuffer로 변환
-      const buffer = await file.arrayBuffer();
-      const huggingfaceResponse = await huggingfaceService.analyzeFoodImage(new Uint8Array(buffer));
-      
+      // 2. 재시도 (백엔드가 Hugging Face 호출을 대신 처리)
+      const huggingfaceResponse = await huggingfaceService.analyzeFoodImage(file);
+
       // 분석 결과를 가공하여 반환
       return {
-        analysis: huggingfaceResponse[0].generated_text,
+        analysis: huggingfaceResponse.analysis ?? huggingfaceResponse.message,
         nutritionInfo: {
           calories: '추정치: 약 450kcal',
           carbs: '추정치: 약 45g',
