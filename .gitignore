@@ -1,33 +1,31 @@
-# 환경 변수 (API 키 등 비밀값 — 절대 커밋 금지)
+# Flutter / Dart generated files
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+build/
+coverage/
+android/.gradle/
+android/local.properties
+android/key.properties
+android/captures/
+*.jks
+*.keystore
+
+# Local tools and personal configuration
+.idea/
+.vscode/
+*.iml
+.codex/
+.agents/
+.aws/
+.DS_Store
+Thumbs.db
+
+# Secrets and private runtime data
 .env
 .env.*
 !.env.example
-
-# 의존성
-node_modules/
-
-# 업로드된 사용자 파일
-backend/uploads/
-
-# 빌드 산출물
-dist/
-dist-ssr/
-*.local
-
-# 로그
-logs/
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-
-# 배포 도구
-.vercel
-
-# 에디터 / OS
-.vscode/*
-!.vscode/extensions.json
-.idea/
-.DS_Store
-Thumbs.db
+*.pem
+*.key
+private/
