@@ -5,7 +5,7 @@
 
 ## 저장소
 
-[ParkSeongGyeol/01_capstone_design](https://github.com/ParkSeongGyeol/01_capstone_design)의 `main`에서 이 프로젝트를 관리한다.
+[ParkSeongGyeol/01_SignCare](https://github.com/ParkSeongGyeol/01_SignCare)의 `main`에서 이 프로젝트를 관리한다.
 기존 프로젝트 파일은 현재 문서로 교체하며, 이전 커밋 이력은 유지한다.
 현재 작업 폴더의 Git 원격 `origin`은 위 저장소를 가리킨다.
 연결만으로 자동 업로드되지는 않으며, 개발 변경은 검토 후 커밋하고 푸시한다.
