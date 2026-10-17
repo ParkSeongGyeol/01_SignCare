@@ -1,0 +1,61 @@
+{
+  "version": "0.1",
+  "date": "2026-10-16",
+  "status": "교육용 추정 초안; 범위·규모·등급·단가 미확정",
+  "weekly_hours": 20,
+  "weekly_hours_status": "사용자 지정",
+  "developers": 1,
+  "hourly_rate_krw": 30000,
+  "hourly_rate_status": "미확정 계산 예시; 실제 지급액 아님",
+  "hours_per_pm": 152,
+  "size_scenarios_ksloc": [3, 4, 6],
+  "baseline_ksloc": 4,
+  "constants": {"A": 2.94, "B": 0.91, "C": 3.67, "D": 0.28},
+  "scale_factors": [
+    {"id": "PREC", "name": "유사 프로젝트 경험", "rating": "Nominal", "value": 3.72},
+    {"id": "FLEX", "name": "개발 유연성", "rating": "Nominal", "value": 3.04},
+    {"id": "RESL", "name": "아키텍처·위험 해결 정도", "rating": "Nominal", "value": 4.24},
+    {"id": "TEAM", "name": "팀 응집성", "rating": "Nominal", "value": 3.29},
+    {"id": "PMAT", "name": "프로세스 성숙도", "rating": "Nominal", "value": 4.68}
+  ],
+  "effort_multipliers": [
+    {"id": "PERS", "name": "인력 역량", "rating": "Nominal", "value": 1.0},
+    {"id": "RCPX", "name": "제품 신뢰성·복잡성", "rating": "Nominal", "value": 1.0},
+    {"id": "PDIF", "name": "플랫폼 난이도", "rating": "Nominal", "value": 1.0},
+    {"id": "PREX", "name": "개발 경험", "rating": "Nominal", "value": 1.0},
+    {"id": "FCIL", "name": "개발 시설·도구", "rating": "Nominal", "value": 1.0},
+    {"id": "RUSE", "name": "재사용성 요구", "rating": "Nominal", "value": 1.0},
+    {"id": "SCED", "name": "일정 압축", "rating": "Nominal", "value": 1.0}
+  ],
+  "sced_percent": 100,
+  "size_breakdown": [
+    {"module": "프로필·예산·조리 환경 설정", "sloc": 400},
+    {"module": "기간별 계획 표시·검토·승인", "sloc": 850},
+    {"module": "계획 변경·버전·차이 표시", "sloc": 500},
+    {"module": "식사·레시피·장보기", "sloc": 650},
+    {"module": "운동·오늘 실행·기록", "sloc": 350},
+    {"module": "실제 지출·주간 점검", "sloc": 450},
+    {"module": "로컬 저장·복구·데이터 접근", "sloc": 450},
+    {"module": "최소 AI 중계·응답 검증·연동", "sloc": 350}
+  ],
+  "tasks": [
+    {"id": "P", "name": "계획 산출물 정리", "deps": [], "fixed_hours": 8, "scope": "outside", "done": "범위·산정·일정 초안 정리"},
+    {"id": "R", "name": "요구분석·기준선", "deps": ["P"], "fixed_hours": 24, "scope": "outside", "done": "핵심 요구·수용 기준·승인 범위 정리"},
+    {"id": "E", "name": "Flutter 개발 환경", "deps": ["P"], "fixed_hours": 16, "scope": "outside", "done": "Android 실기기 기본 앱 실행"},
+    {"id": "A", "name": "화면·상호작용 설계", "deps": ["R"], "weight": 5, "scope": "cocomo", "done": "초안·승인·변경·실행 화면 및 오류 흐름"},
+    {"id": "B", "name": "아키텍처·데이터 계약", "deps": ["R", "E"], "weight": 5, "scope": "cocomo", "done": "저장·AI 경계와 데이터 계약 결정"},
+    {"id": "C", "name": "클래스·패턴·테스트 설계", "deps": ["A", "B"], "weight": 4, "scope": "cocomo", "done": "책임·의존성·승인 규칙·검증 설계"},
+    {"id": "D", "name": "앱 골격·로컬 저장", "deps": ["C"], "weight": 7, "scope": "cocomo", "done": "화면 전환·저장·재실행 복구"},
+    {"id": "F", "name": "프로필·환경·예산", "deps": ["D"], "weight": 5, "scope": "cocomo", "done": "기본 도구 제외·제약·예산 설정 저장"},
+    {"id": "G", "name": "기간 계획·승인·변경", "deps": ["F"], "weight": 18, "scope": "cocomo", "done": "예시 데이터로 버전·차이·승인·기록 보존"},
+    {"id": "H", "name": "식사·레시피·장보기", "deps": ["G"], "weight": 10, "scope": "cocomo", "done": "기간 계획과 조리·구매 목록 연결"},
+    {"id": "I", "name": "운동·오늘·실행 기록", "deps": ["G"], "weight": 7, "scope": "cocomo", "done": "계획 실행과 실제 식사·운동 기록"},
+    {"id": "J", "name": "지출·주간 점검", "deps": ["G"], "weight": 8, "scope": "cocomo", "done": "실제 지출 집계·중복 방지·기간 회고"},
+    {"id": "K", "name": "최소 서버·AI 연동", "deps": ["C"], "weight": 12, "scope": "cocomo", "done": "앱에 비밀키 없이 계획 생성·검증·실패 처리"},
+    {"id": "L", "name": "통합·회귀 테스트", "deps": ["H", "I", "J", "K"], "weight": 10, "scope": "cocomo", "done": "계획부터 기록·재실행·AI 실패까지 검증"},
+    {"id": "M", "name": "품질 개선·결함 수정", "deps": ["L"], "weight": 7, "scope": "cocomo", "done": "데이터 정확성·사용성·개인정보·복구 점검"},
+    {"id": "N", "name": "사용자 인수 검증", "deps": ["M"], "weight": 2, "scope": "cocomo", "done": "수용 기준별 실기기 검증 기록"},
+    {"id": "Z", "name": "설치·운영 문서", "deps": ["N"], "fixed_hours": 16, "scope": "outside", "done": "개인용 Android 빌드 설치와 사용 안내"}
+  ],
+  "resource_order": ["P", "R", "E", "A", "B", "C", "D", "F", "G", "H", "I", "J", "K", "L", "M", "N", "Z"]
+}

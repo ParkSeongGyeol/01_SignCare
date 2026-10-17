@@ -1,0 +1,418 @@
+{
+  "exponent": 1.0997,
+  "schedule_exponent": 0.31794,
+  "eaf": 1.0,
+  "scenarios": [
+    {
+      "ksloc": 3,
+      "pm": 9.84096243975045,
+      "hours": 1495.8262908420684,
+      "example_labor_krw": 44874788.72526205,
+      "solo_weeks": 74.79131454210342,
+      "tdev_months": 7.592633391914137
+    },
+    {
+      "ksloc": 4,
+      "pm": 13.50307571551975,
+      "hours": 2052.4675087590017,
+      "example_labor_krw": 61574025.26277005,
+      "solo_weeks": 102.62337543795009,
+      "tdev_months": 8.396065883383772
+    },
+    {
+      "ksloc": 6,
+      "pm": 21.09017874209271,
+      "hours": 3205.707168798092,
+      "example_labor_krw": 96171215.06394276,
+      "solo_weeks": 160.2853584399046,
+      "tdev_months": 9.674847813974718
+    }
+  ],
+  "baseline": {
+    "ksloc": 4,
+    "pm": 13.50307571551975,
+    "hours": 2052.4675087590017,
+    "example_labor_krw": 61574025.26277005,
+    "solo_weeks": 102.62337543795009,
+    "tdev_months": 8.396065883383772
+  },
+  "main_rounded_hours": 2053,
+  "tasks": [
+    {
+      "id": "P",
+      "name": "계획 산출물 정리",
+      "deps": [],
+      "fixed_hours": 8,
+      "scope": "outside",
+      "done": "범위·산정·일정 초안 정리",
+      "hours": 8,
+      "duration_weeks": 0.4,
+      "es": 0,
+      "ef": 0.4,
+      "lf": 0.400000000000005,
+      "ls": 4.9960036108132044e-15,
+      "float": 4.9960036108132044e-15,
+      "critical": true,
+      "resource_start": 0,
+      "resource_finish": 0.4
+    },
+    {
+      "id": "R",
+      "name": "요구분석·기준선",
+      "deps": [
+        "P"
+      ],
+      "fixed_hours": 24,
+      "scope": "outside",
+      "done": "핵심 요구·수용 기준·승인 범위 정리",
+      "hours": 24,
+      "duration_weeks": 1.2,
+      "es": 0.4,
+      "ef": 1.6,
+      "lf": 1.600000000000005,
+      "ls": 0.400000000000005,
+      "float": 4.9960036108132044e-15,
+      "critical": true,
+      "resource_start": 0.4,
+      "resource_finish": 1.6
+    },
+    {
+      "id": "E",
+      "name": "Flutter 개발 환경",
+      "deps": [
+        "P"
+      ],
+      "fixed_hours": 16,
+      "scope": "outside",
+      "done": "Android 실기기 기본 앱 실행",
+      "hours": 16,
+      "duration_weeks": 0.8,
+      "es": 0.4,
+      "ef": 1.2000000000000002,
+      "lf": 1.600000000000005,
+      "ls": 0.8000000000000049,
+      "float": 0.4000000000000049,
+      "critical": false,
+      "resource_start": 1.6,
+      "resource_finish": 2.4000000000000004
+    },
+    {
+      "id": "A",
+      "name": "화면·상호작용 설계",
+      "deps": [
+        "R"
+      ],
+      "weight": 5,
+      "scope": "cocomo",
+      "done": "초안·승인·변경·실행 화면 및 오류 흐름",
+      "hours": 103,
+      "duration_weeks": 5.15,
+      "es": 1.6,
+      "ef": 6.75,
+      "lf": 6.750000000000005,
+      "ls": 1.600000000000005,
+      "float": 4.884981308350689e-15,
+      "critical": true,
+      "resource_start": 2.4000000000000004,
+      "resource_finish": 7.550000000000001
+    },
+    {
+      "id": "B",
+      "name": "아키텍처·데이터 계약",
+      "deps": [
+        "R",
+        "E"
+      ],
+      "weight": 5,
+      "scope": "cocomo",
+      "done": "저장·AI 경계와 데이터 계약 결정",
+      "hours": 103,
+      "duration_weeks": 5.15,
+      "es": 1.6,
+      "ef": 6.75,
+      "lf": 6.750000000000005,
+      "ls": 1.600000000000005,
+      "float": 4.884981308350689e-15,
+      "critical": true,
+      "resource_start": 7.550000000000001,
+      "resource_finish": 12.700000000000001
+    },
+    {
+      "id": "C",
+      "name": "클래스·패턴·테스트 설계",
+      "deps": [
+        "A",
+        "B"
+      ],
+      "weight": 4,
+      "scope": "cocomo",
+      "done": "책임·의존성·승인 규칙·검증 설계",
+      "hours": 82,
+      "duration_weeks": 4.1,
+      "es": 6.75,
+      "ef": 10.85,
+      "lf": 10.850000000000005,
+      "ls": 6.750000000000005,
+      "float": 5.329070518200751e-15,
+      "critical": true,
+      "resource_start": 12.700000000000001,
+      "resource_finish": 16.8
+    },
+    {
+      "id": "D",
+      "name": "앱 골격·로컬 저장",
+      "deps": [
+        "C"
+      ],
+      "weight": 7,
+      "scope": "cocomo",
+      "done": "화면 전환·저장·재실행 복구",
+      "hours": 144,
+      "duration_weeks": 7.2,
+      "es": 10.85,
+      "ef": 18.05,
+      "lf": 18.050000000000004,
+      "ls": 10.850000000000005,
+      "float": 5.329070518200751e-15,
+      "critical": true,
+      "resource_start": 16.8,
+      "resource_finish": 24.0
+    },
+    {
+      "id": "F",
+      "name": "프로필·환경·예산",
+      "deps": [
+        "D"
+      ],
+      "weight": 5,
+      "scope": "cocomo",
+      "done": "기본 도구 제외·제약·예산 설정 저장",
+      "hours": 103,
+      "duration_weeks": 5.15,
+      "es": 18.05,
+      "ef": 23.200000000000003,
+      "lf": 23.200000000000006,
+      "ls": 18.050000000000004,
+      "float": 3.552713678800501e-15,
+      "critical": true,
+      "resource_start": 24.0,
+      "resource_finish": 29.15
+    },
+    {
+      "id": "G",
+      "name": "기간 계획·승인·변경",
+      "deps": [
+        "F"
+      ],
+      "weight": 18,
+      "scope": "cocomo",
+      "done": "예시 데이터로 버전·차이·승인·기록 보존",
+      "hours": 369,
+      "duration_weeks": 18.45,
+      "es": 23.200000000000003,
+      "ef": 41.650000000000006,
+      "lf": 41.650000000000006,
+      "ls": 23.200000000000006,
+      "float": 3.552713678800501e-15,
+      "critical": true,
+      "resource_start": 29.15,
+      "resource_finish": 47.599999999999994
+    },
+    {
+      "id": "H",
+      "name": "식사·레시피·장보기",
+      "deps": [
+        "G"
+      ],
+      "weight": 10,
+      "scope": "cocomo",
+      "done": "기간 계획과 조리·구매 목록 연결",
+      "hours": 205,
+      "duration_weeks": 10.25,
+      "es": 41.650000000000006,
+      "ef": 51.900000000000006,
+      "lf": 51.900000000000006,
+      "ls": 41.650000000000006,
+      "float": 0,
+      "critical": true,
+      "resource_start": 47.599999999999994,
+      "resource_finish": 57.849999999999994
+    },
+    {
+      "id": "I",
+      "name": "운동·오늘·실행 기록",
+      "deps": [
+        "G"
+      ],
+      "weight": 7,
+      "scope": "cocomo",
+      "done": "계획 실행과 실제 식사·운동 기록",
+      "hours": 144,
+      "duration_weeks": 7.2,
+      "es": 41.650000000000006,
+      "ef": 48.85000000000001,
+      "lf": 51.900000000000006,
+      "ls": 44.7,
+      "float": 3.049999999999997,
+      "critical": false,
+      "resource_start": 57.849999999999994,
+      "resource_finish": 65.05
+    },
+    {
+      "id": "J",
+      "name": "지출·주간 점검",
+      "deps": [
+        "G"
+      ],
+      "weight": 8,
+      "scope": "cocomo",
+      "done": "실제 지출 집계·중복 방지·기간 회고",
+      "hours": 164,
+      "duration_weeks": 8.2,
+      "es": 41.650000000000006,
+      "ef": 49.85000000000001,
+      "lf": 51.900000000000006,
+      "ls": 43.7,
+      "float": 2.049999999999997,
+      "critical": false,
+      "resource_start": 65.05,
+      "resource_finish": 73.25
+    },
+    {
+      "id": "K",
+      "name": "최소 서버·AI 연동",
+      "deps": [
+        "C"
+      ],
+      "weight": 12,
+      "scope": "cocomo",
+      "done": "앱에 비밀키 없이 계획 생성·검증·실패 처리",
+      "hours": 246,
+      "duration_weeks": 12.3,
+      "es": 10.85,
+      "ef": 23.15,
+      "lf": 51.900000000000006,
+      "ls": 39.60000000000001,
+      "float": 28.750000000000007,
+      "critical": false,
+      "resource_start": 73.25,
+      "resource_finish": 85.55
+    },
+    {
+      "id": "L",
+      "name": "통합·회귀 테스트",
+      "deps": [
+        "H",
+        "I",
+        "J",
+        "K"
+      ],
+      "weight": 10,
+      "scope": "cocomo",
+      "done": "계획부터 기록·재실행·AI 실패까지 검증",
+      "hours": 205,
+      "duration_weeks": 10.25,
+      "es": 51.900000000000006,
+      "ef": 62.150000000000006,
+      "lf": 62.150000000000006,
+      "ls": 51.900000000000006,
+      "float": 0,
+      "critical": true,
+      "resource_start": 85.55,
+      "resource_finish": 95.8
+    },
+    {
+      "id": "M",
+      "name": "품질 개선·결함 수정",
+      "deps": [
+        "L"
+      ],
+      "weight": 7,
+      "scope": "cocomo",
+      "done": "데이터 정확성·사용성·개인정보·복구 점검",
+      "hours": 144,
+      "duration_weeks": 7.2,
+      "es": 62.150000000000006,
+      "ef": 69.35000000000001,
+      "lf": 69.35000000000001,
+      "ls": 62.150000000000006,
+      "float": 0,
+      "critical": true,
+      "resource_start": 95.8,
+      "resource_finish": 103.0
+    },
+    {
+      "id": "N",
+      "name": "사용자 인수 검증",
+      "deps": [
+        "M"
+      ],
+      "weight": 2,
+      "scope": "cocomo",
+      "done": "수용 기준별 실기기 검증 기록",
+      "hours": 41,
+      "duration_weeks": 2.05,
+      "es": 69.35000000000001,
+      "ef": 71.4,
+      "lf": 71.4,
+      "ls": 69.35000000000001,
+      "float": 0,
+      "critical": true,
+      "resource_start": 103.0,
+      "resource_finish": 105.05
+    },
+    {
+      "id": "Z",
+      "name": "설치·운영 문서",
+      "deps": [
+        "N"
+      ],
+      "fixed_hours": 16,
+      "scope": "outside",
+      "done": "개인용 Android 빌드 설치와 사용 안내",
+      "hours": 16,
+      "duration_weeks": 0.8,
+      "es": 71.4,
+      "ef": 72.2,
+      "lf": 72.2,
+      "ls": 71.4,
+      "float": 0,
+      "critical": true,
+      "resource_start": 105.05,
+      "resource_finish": 105.85
+    }
+  ],
+  "cpm_weeks": 72.2,
+  "solo_weeks": 105.85,
+  "total_hours": 2117,
+  "critical_paths": [
+    [
+      "P",
+      "R",
+      "A",
+      "C",
+      "D",
+      "F",
+      "G",
+      "H",
+      "L",
+      "M",
+      "N",
+      "Z"
+    ],
+    [
+      "P",
+      "R",
+      "B",
+      "C",
+      "D",
+      "F",
+      "G",
+      "H",
+      "L",
+      "M",
+      "N",
+      "Z"
+    ]
+  ]
+}
